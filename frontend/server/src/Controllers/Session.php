@@ -20,6 +20,22 @@ class ScopedFacebook {
     }
 }
 
+class ScopedGitHub {
+    /** @var \OmegaUp\ScopedSession */
+    public $scopedSession;
+    /** @var \League\OAuth2\Client\Provider\Github */
+    public $github;
+
+    public function __construct() {
+        $this->scopedSession = new \OmegaUp\ScopedSession();
+        $this->github = new \League\OAuth2\Client\Provider\Github([
+            'clientId' => OMEGAUP_GITHUB_CLIENTID,
+            'clientSecret' => OMEGAUP_GITHUB_SECRET,
+            'redirectUri' => OMEGAUP_URL . '/login?github',
+        ]);
+    }
+}
+
 /**
  * Session controller handles sessions.
  * @psalm-type AssociatedIdentity=array{default: bool, username: string}
@@ -50,6 +66,13 @@ class Session extends \OmegaUp\Controllers\Controller {
             'scope' => ['email'],
         ]);
     }
+
+    public static function getGitHubLoginUrl(): string {
+    $scopedGitHub = new ScopedGitHub();
+    return $scopedGitHub->github->getAuthorizationUrl([
+        'scope' => ['user:email'],
+    ]);
+}
 
     private static function isAuthTokenValid(string $authToken): bool {
         //do some other basic testing on authToken
@@ -632,6 +655,51 @@ class Session extends \OmegaUp\Controllers\Controller {
             'Facebook',
             strval($fbUserProfile->getEmail()),
             $fbUserProfile->getName()
+        );
+
+        self::redirect();
+    }
+
+    /**
+    * Logs in via GitHub API.
+    */
+    public static function loginViaGitHub(): void {
+        $scopedGitHub = new ScopedGitHub();
+        try {
+            /** @var \League\OAuth2\Client\Token\AccessToken */
+            $accessToken = $scopedGitHub->github->getAccessToken('authorization_code', [
+                'code' => $_GET['code'],
+            ]);
+        } catch (\Exception $e) {
+            self::$log->error(
+                'getAccessToken returned an error',
+                ['exception' => $e]
+            );
+            throw $e;
+        }
+
+        try {
+            $ghUserProfile = $scopedGitHub->github->getResourceOwner(
+                $accessToken
+            );
+        } catch (\Exception $e) {
+            self::$log->error("Unable to login via GitHub: {$e}");
+            throw $e;
+        }
+
+        self::$log->info('User is logged in via GitHub !!');
+        if (is_null($ghUserProfile->getEmail())) {
+            self::$log->error('GitHub email empty');
+            throw new \OmegaUp\Exceptions\InvalidParameterException(
+                'loginGitHubEmptyEmailError',
+                'error'
+            );
+        }
+
+        \OmegaUp\Controllers\Session::thirdPartyLogin(
+            'GitHub',
+            strval($ghUserProfile->getEmail()),
+            $ghUserProfile->getName()
         );
 
         self::redirect();

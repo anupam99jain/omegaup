@@ -3,6 +3,7 @@
     <omegaup-login
       :facebook-url="facebookUrl"
       :google-client-id="googleClientId"
+      :github-url="githubUrl"
       @login="(username, password) => $emit('login', username, password)"
     >
     </omegaup-login>
@@ -34,6 +35,7 @@ export default class Signin extends Vue {
   @Prop() validateRecaptcha!: boolean;
   @Prop() facebookUrl!: string;
   @Prop() googleClientId!: string;
+  @Prop() githubUrl!: string;
   @Prop() hasVisitedSection!: string;
   @Prop({ default: false }) useSignupFormWithBirthDate!: boolean;
 

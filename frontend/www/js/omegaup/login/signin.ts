@@ -69,6 +69,7 @@ OmegaUp.on('ready', () => {
         props: {
           validateRecaptcha: payload.validateRecaptcha,
           facebookUrl: payload.facebookUrl,
+          githubUrl: payload.githubUrl,
           googleClientId,
           hasVisitedSection: payload.hasVisitedSection,
           useSignupFormWithBirthDate,

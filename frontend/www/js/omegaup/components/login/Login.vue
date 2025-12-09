@@ -26,6 +26,11 @@
                 data-logo_alignment="left"
               ></div>
               <!-- id-lint on -->
+              
+              <!-- GitHub Sign-In Button -->
+              <a :href="githubUrl" class="btn btn-dark btn-lg mt-3 w-100">
+                <i class="fab fa-github"></i> {{ T.loginWithGitHub }}
+              </a>
             </div>
           </div>
         </div>
@@ -89,6 +94,7 @@ import T from '../../lang';
 export default class Login extends Vue {
   @Prop() facebookUrl!: string;
   @Prop() googleClientId!: string;
+  @Prop() githubUrl!: string;
 
   usernameOrEmail: string = '';
   password: string = '';
