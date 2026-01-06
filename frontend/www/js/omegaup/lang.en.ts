@@ -840,6 +840,8 @@ const translations: { [key: string]: string; } = {
   loginFacebookEmptyEmailError: "An email address is needed to use omegaUp. Please grant access to Facebook's email to continue",
   loginFederated: "Login using these sites",
   loginGoogleInvalidCSRFToken: "Invalid CSRF token",
+  loginWithGitHub: "Sign in with GitHub",
+	loginGitHubEmptyEmailError: "An email address is needed to use omegaUp. Please grant access to GitHub email to continue",
   loginHeader: "Login to omegaUp",
   loginLogIn: "Log in",
   loginNative: "omegaUp account",

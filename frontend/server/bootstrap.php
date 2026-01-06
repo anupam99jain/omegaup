@@ -55,6 +55,8 @@ $contentSecurityPolicy = [
         'https://*.analytics.google.com',
         'https://*.googletagmanager.com',
         'https://accounts.google.com',
+        'https://github.com',
+        'https://api.github.com',
     ],
     'img-src' => [
         // Problems can embed images from anywhere in the internet, so we need
@@ -79,6 +81,7 @@ $contentSecurityPolicy = [
         'https://www.google-analytics.com',
         'https://connect.facebook.net',
         'https://platform.twitter.com',
+        'https://github.com'
     ],
     'frame-src' => [
         '\'self\'',
@@ -91,6 +94,7 @@ $contentSecurityPolicy = [
         'https://docs.google.com',
         'https://staticxx.facebook.com',
         'https://syndication.twitter.com',
+        'https://github.com',
         'blob:',
     ],
     'report-uri' => [

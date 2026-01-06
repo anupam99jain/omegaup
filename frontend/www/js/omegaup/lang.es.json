@@ -839,6 +839,8 @@
 	"loginFacebookEmptyEmailError": "Se necesita acceso a tu direcci\u00f3n de correo para utilizar omegaUp. Por favor permite el acceso a tu correo de Facebook para continuar.",
 	"loginFederated": "Cuenta en otros sitios",
 	"loginGoogleInvalidCSRFToken": "Token CSRF inv\u00e1lido",
+	"loginWithGitHub": "Iniciar sesi\u00f3n con GitHub",
+	"loginGitHubEmptyEmailError": "Se necesita una direcci\u00f3n de correo electr\u00f3nico para usar omegaUp. Por favor autoriza el acceso al correo de GitHub para continuar",
 	"loginHeader": "Inicia sesi\u00f3n en omegaUp",
 	"loginLogIn": "Iniciar sesi\u00f3n",
 	"loginNative": "Cuenta omegaUp",
