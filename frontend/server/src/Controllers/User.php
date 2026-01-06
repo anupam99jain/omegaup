@@ -4804,7 +4804,7 @@ class User extends \OmegaUp\Controllers\Controller {
         if ($r->offsetExists('fb')) {
             $thirdPartyLogin = 'facebook';
         }
-        if ($r->offsetExists('github')) { 
+        if ($r->offsetExists('github')) {
             $thirdPartyLogin = 'github';
         }
 
