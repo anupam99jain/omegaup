@@ -68,11 +68,11 @@ class Session extends \OmegaUp\Controllers\Controller {
     }
 
     public static function getGitHubLoginUrl(): string {
-    $scopedGitHub = new ScopedGitHub();
-    return $scopedGitHub->github->getAuthorizationUrl([
-        'scope' => ['user:email'],
-    ]);
-}
+        $scopedGitHub = new ScopedGitHub();
+        return $scopedGitHub->github->getAuthorizationUrl([
+            'scope' => ['user:email'],
+        ]);
+    }
 
     private static function isAuthTokenValid(string $authToken): bool {
         //do some other basic testing on authToken
