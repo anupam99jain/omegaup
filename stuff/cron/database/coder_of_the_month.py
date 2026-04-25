@@ -99,7 +99,8 @@ def get_last_12_coders_of_the_month(
               WHERE selected_by IS NOT NULL AND category = %s
           ) AS manual_sel ON manual_sel.time = cm.time
           WHERE
-              (cm.selected_by IS NOT NULL OR (cm.`ranking` = 1 AND manual_sel.time IS NULL))
+              (cm.selected_by IS NOT NULL OR
+               (cm.`ranking` = 1 AND manual_sel.time IS NULL))
               AND cm.category = %s
               AND cm.time <= %s
               AND cm.time > DATE_SUB(%s, INTERVAL 12 MONTH)
